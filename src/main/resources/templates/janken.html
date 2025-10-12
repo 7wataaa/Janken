@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Janken</title>
+</head>
+
+<body>
+  <th:block th:if="${user_id}">
+    Hi! [[${user_id}]]
+
+    <br>
+
+    <script th:inline="javascript" th:if="${user_id}">
+      function submitHand(hand) {
+        document.getElementById("handInput").value = hand;
+        document.getElementById("handForm").submit();
+      }
+    </script>
+
+    <a href="#" onclick="submitHand(0)">グー</a>
+    <a href="#" onclick="submitHand(1)">チョキ</a>
+    <a href="#" onclick="submitHand(2)">パー</a>
+
+    <form action="/janken" method="post" id="handForm">
+      <input type="hidden" name="user_id" th:value="${user_id}" />
+      <input type="hidden" name="hand" id="handInput" />
+    </form>
+
+    <br>
+
+    <th:block th:if="${janken_result}">
+      <p>ユーザーの手: [[${janken_result.user_hand}]]</p>
+      <p>CPUの手: [[${janken_result.cpu_hand}]]</p>
+      <p>結果: [[${janken_result.result}]]</p>
+    </th:block>
+
+  </th:block>
+
+</body>
+
+</html>
