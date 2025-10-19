@@ -22,7 +22,7 @@
     <a href="#" onclick="submitHand(1)">チョキ</a>
     <a href="#" onclick="submitHand(2)">パー</a>
 
-    <form action="/janken" method="post" id="handForm">
+    <form th:action="@{/janken}" method="post" id="handForm">
       <input type="hidden" name="user_id" th:value="${user_id}" />
       <input type="hidden" name="hand" id="handInput" />
     </form>
