@@ -3,6 +3,7 @@ package oit.is.z2789.kaizi.janken.controller;
 import java.security.Principal;
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,14 +11,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import oit.is.z2789.kaizi.janken.model.Entry;
+
 @Controller
 @RequestMapping("/janken")
 public class JankenController {
+  @Autowired
+  private Entry entry;
 
   @GetMapping
   String janken(Principal prin, ModelMap model) {
     String user_id = prin.getName();
     model.addAttribute("user_id", user_id);
+    this.entry.addUser(user_id);
+    model.addAttribute("room", entry);
+
     return "janken.html";
   }
 
@@ -31,6 +39,7 @@ public class JankenController {
   @PostMapping(params = { "user_id", "hand" })
   String janken(@RequestParam String user_id, @RequestParam Integer hand, ModelMap model) {
     model.addAttribute("user_id", user_id);
+    model.addAttribute("room", entry);
 
     var jankenResult = new HashMap<String, String>();
 
