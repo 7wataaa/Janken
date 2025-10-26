@@ -7,6 +7,6 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface MatchMapper {
-  @Select("SELECT * from match")
+  @Select("SELECT * from matches")
   ArrayList<Match> selectAllMatches();
 }

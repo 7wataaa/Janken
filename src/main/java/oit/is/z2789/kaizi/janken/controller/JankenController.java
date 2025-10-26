@@ -16,7 +16,6 @@ import oit.is.z2789.kaizi.janken.model.MatchMapper;
 import oit.is.z2789.kaizi.janken.model.UserMapper;
 
 @Controller
-@RequestMapping("/janken")
 public class JankenController {
   @Autowired
   private Entry entry;
@@ -24,28 +23,28 @@ public class JankenController {
   @Autowired
   private UserMapper user;
   @Autowired
-  private MatchMapper match;
+  private MatchMapper matches;
 
-  @GetMapping
+  @GetMapping("/janken")
   String janken(Principal prin, ModelMap model) {
     String user_id = prin.getName();
     model.addAttribute("user_id", user_id);
     this.entry.addUser(user_id);
     model.addAttribute("room", entry);
     model.addAttribute("users", user.selectAllUsers());
-    model.addAttribute("matches", match.selectAllMatches());
+    model.addAttribute("matches", matches.selectAllMatches());
 
     return "janken.html";
   }
 
-  @PostMapping(params = "user_id")
+  @PostMapping(path = "/janken", params = "user_id")
   String janken(@RequestParam String user_id, ModelMap model) {
     model.addAttribute("user_id", user_id);
 
     return "janken.html";
   }
 
-  @PostMapping(params = { "user_id", "hand" })
+  @PostMapping(path = "/janken", params = { "user_id", "hand" })
   String janken(@RequestParam String user_id, @RequestParam Integer hand, ModelMap model) {
     model.addAttribute("user_id", user_id);
     model.addAttribute("room", entry);
@@ -102,5 +101,13 @@ public class JankenController {
     model.addAttribute("janken_result", jankenResult);
 
     return "janken.html";
+  }
+
+  @GetMapping("/match")
+  String match(@RequestParam Integer id, Principal prin, ModelMap model) {
+    model.addAttribute("vsUser", user.selectUserById(id));
+    model.addAttribute("userName", prin.getName());
+
+    return "match.html";
   }
 }

@@ -4,8 +4,8 @@ public class Match {
   int id;
   int user1;
   int user2;
-  String hand1;
-  String hand2;
+  String user1Hand;
+  String user2Hand;
 
   public int getId() {
     return id;
@@ -31,20 +31,20 @@ public class Match {
     this.user2 = user2;
   }
 
-  public String getHand1() {
-    return hand1;
+  public String getUser1Hand() {
+    return user1Hand;
   }
 
-  public void setHand1(String hand1) {
-    this.hand1 = hand1;
+  public void setUser1Hand(String hand1) {
+    this.user1Hand = hand1;
   }
 
-  public String getHand2() {
-    return hand2;
+  public String getUser2Hand() {
+    return user2Hand;
   }
 
-  public void setHand2(String hand2) {
-    this.hand2 = hand2;
+  public void setUser2Hand(String hand2) {
+    this.user2Hand = hand2;
   }
 
 }
