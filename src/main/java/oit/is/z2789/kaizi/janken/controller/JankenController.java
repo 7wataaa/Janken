@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import oit.is.z2789.kaizi.janken.model.Entry;
+import oit.is.z2789.kaizi.janken.model.UserMapper;
 
 @Controller
 @RequestMapping("/janken")
@@ -19,12 +20,16 @@ public class JankenController {
   @Autowired
   private Entry entry;
 
+  @Autowired
+  private UserMapper user;
+
   @GetMapping
   String janken(Principal prin, ModelMap model) {
     String user_id = prin.getName();
     model.addAttribute("user_id", user_id);
     this.entry.addUser(user_id);
     model.addAttribute("room", entry);
+    model.addAttribute("users", user.selectAllUsers());
 
     return "janken.html";
   }

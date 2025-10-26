@@ -37,6 +37,13 @@
 
     <br>
 
+    <th:block th:if="${users != null}">
+      <h3>登録ユーザ一覧</h3>
+      <ul>
+        <li th:each="user : ${users}">[[${user.id}]] [[${user.name}]]</li>
+      </ul>
+    </th:block>
+
 
     <th:block th:if="${user_id != null and room != null}">
       <h3>エントリー</h3>
