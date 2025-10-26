@@ -44,19 +44,27 @@
       </ul>
     </th:block>
 
-
-    <th:block th:if="${user_id != null and room != null}">
-      <h3>エントリー</h3>
-      <p>RoomNo: [[${room.roomNo}]]</p>
-      <p>参加ユーザ一覧:</p>
+    <th:block th:if="${matches != null}">
+      <h3>対戦履歴</h3>
       <ul>
-        <li th:each="user : ${room.users}">[[${user}]]</li>
+        <li th:each="match : ${matches}">
+          [[${match.id}]]: [[${match.user1}]]([[${match.user1Hand}]]) vs [[${match.user2}]]([[${match.user2Hand}]])
+        </li>
       </ul>
+
+
+      <th:block th:if="${user_id != null and room != null}">
+        <h3>エントリー</h3>
+        <p>RoomNo: [[${room.roomNo}]]</p>
+        <p>参加ユーザ一覧:</p>
+        <ul>
+          <li th:each="user : ${room.users}">[[${user}]]</li>
+        </ul>
+      </th:block>
+
     </th:block>
 
-  </th:block>
-
-  <a th:href="@{/logout}">ログアウト</a>
+    <a th:href="@{/logout}">ログアウト</a>
 
   </th:block>
 

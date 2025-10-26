@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import oit.is.z2789.kaizi.janken.model.Entry;
+import oit.is.z2789.kaizi.janken.model.MatchMapper;
 import oit.is.z2789.kaizi.janken.model.UserMapper;
 
 @Controller
@@ -22,6 +23,8 @@ public class JankenController {
 
   @Autowired
   private UserMapper user;
+  @Autowired
+  private MatchMapper match;
 
   @GetMapping
   String janken(Principal prin, ModelMap model) {
@@ -30,6 +33,7 @@ public class JankenController {
     this.entry.addUser(user_id);
     model.addAttribute("room", entry);
     model.addAttribute("users", user.selectAllUsers());
+    model.addAttribute("matches", match.selectAllMatches());
 
     return "janken.html";
   }
