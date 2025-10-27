@@ -20,7 +20,7 @@ public class JankenAuthConfiguration {
             .logoutUrl("/logout")
             .logoutSuccessUrl("/"))
         .authorizeHttpRequests(authz -> authz
-            .requestMatchers("/janken/**")
+            .requestMatchers("/janken/**", "/match/**")
             .authenticated()
             .anyRequest()
             .permitAll())
