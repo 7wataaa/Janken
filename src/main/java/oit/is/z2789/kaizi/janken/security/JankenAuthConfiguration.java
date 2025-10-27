@@ -20,12 +20,15 @@ public class JankenAuthConfiguration {
             .logoutUrl("/logout")
             .logoutSuccessUrl("/"))
         .authorizeHttpRequests(authz -> authz
-            .requestMatchers("/janken/**")
+            .requestMatchers("/janken/**", "/match/**")
             .authenticated()
             .anyRequest()
-            .permitAll());
-    // .csrf(csrf -> csrf.ignoringRequestMatchers("/sample2*/**"));
-
+            .permitAll())
+        .csrf(csrf -> csrf
+            .ignoringRequestMatchers("/h2-console/*", "/sample2*/**")) // sample2用にCSRF対策を無効化
+        .headers(headers -> headers
+            .frameOptions(frameOptions -> frameOptions
+                .sameOrigin()));
     return http.build();
   }
 
@@ -42,6 +45,12 @@ public class JankenAuthConfiguration {
         .roles("USER")
         .build();
 
-    return new InMemoryUserDetailsManager(user1, user2);
+    UserDetails honda = User
+        .withUsername("ほんだ")
+        .password("{bcrypt}$2y$05$tk/zBqi.b5cngl7bdV11Yerb8tuVc/bP.MfnmIWCpUOJHE8EmpU7y")
+        .roles("USER")
+        .build();
+
+    return new InMemoryUserDetailsManager(user1, user2, honda);
   }
 }
