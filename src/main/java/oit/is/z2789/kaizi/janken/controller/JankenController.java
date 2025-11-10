@@ -35,6 +35,7 @@ public class JankenController {
     model.addAttribute("room", entry);
     model.addAttribute("users", user.selectAllUsers());
     model.addAttribute("matches", matches.selectAllMatches());
+    model.addAttribute("matchinfo", matchInfoMapper.selectActiveMatchInfo());
 
     return "janken.html";
   }

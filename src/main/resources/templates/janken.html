@@ -63,7 +63,20 @@
 
     </th:block>
 
+    <th:block th:if="${matchinfo != null}">
+      <!-- jankenのページでアクティブな試合について「id:(MatchInfoのidが表示される) user1:(MatchInfoのuser1が表示される) user2:(MatchInfoのuser1が表示される) isActive:(MatchInfoのisActiveが表示される)」の様に表示される -->
+      <h3>アクティブな試合情報</h3>
+      <ul>
+        <li th:each="info : ${matchinfo}">
+          id: [[${info.getId()}]] user1: [[${info.getUser1()}]] user2: [[${info.getUser2()}]] isActive:
+          [[${info.getIsActive()}]]
+        </li>
+      </ul>
+    </th:block>
+
     <a th:href="@{/logout}">ログアウト</a>
+
+
 
   </th:block>
 
