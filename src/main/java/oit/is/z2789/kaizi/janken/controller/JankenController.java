@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import oit.is.z2789.kaizi.janken.model.Entry;
+import oit.is.z2789.kaizi.janken.model.MatchInfoMapper;
 import oit.is.z2789.kaizi.janken.model.MatchMapper;
 import oit.is.z2789.kaizi.janken.model.UserMapper;
 
@@ -23,6 +24,8 @@ public class JankenController {
   private UserMapper user;
   @Autowired
   private MatchMapper matches;
+  @Autowired
+  private MatchInfoMapper matchInfoMapper;
 
   @GetMapping("/janken")
   String janken(Principal prin, ModelMap model) {
@@ -32,6 +35,7 @@ public class JankenController {
     model.addAttribute("room", entry);
     model.addAttribute("users", user.selectAllUsers());
     model.addAttribute("matches", matches.selectAllMatches());
+    model.addAttribute("matchinfo", matchInfoMapper.selectActiveMatchInfo());
 
     return "janken.html";
   }
@@ -187,5 +191,18 @@ public class JankenController {
         Hand.fromValue(cpuHand.getValue()).toString());
 
     return "match.html";
+  }
+
+  @GetMapping("/wait")
+  String wait(@RequestParam Integer hand, @RequestParam String user_name, @RequestParam Integer opponent_id,
+      ModelMap model) {
+    model.addAttribute("user_id", user_name);
+
+    matchInfoMapper.insertMatchInfo(Integer.toString(user.selectUserByName(user_name)
+        .getId()), opponent_id.toString(),
+        hand.toString(),
+        true);
+
+    return "wait.html";
   }
 }
