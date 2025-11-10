@@ -9,3 +9,10 @@ CREATE TABLE matches (
     user1Hand VARCHAR NOT NULL,
     user2Hand VARCHAR NOT NULL
 );
+CREATE TABLE matchinfo (
+    id IDENTITY PRIMARY KEY,
+    user1 INTEGER NOT NULL,
+    user2 INTEGER NOT NULL,
+    user1Hand VARCHAR NOT NULL,
+    isActive BOOLEAN NOT NULL
+)
