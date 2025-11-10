@@ -1,0 +1,50 @@
+package oit.is.z2789.kaizi.janken.model;
+
+public class MatchInfo {
+  String id;
+  String user1;
+  String user2;
+  String user1Hand;
+  Boolean isActive;
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getUser1() {
+    return user1;
+  }
+
+  public void setUser1(String user1) {
+    this.user1 = user1;
+  }
+
+  public String getUser2() {
+    return user2;
+  }
+
+  public void setUser2(String user2) {
+    this.user2 = user2;
+  }
+
+  public String getUser1Hand() {
+    return user1Hand;
+  }
+
+  public void setUser1Hand(String user1Hand) {
+    this.user1Hand = user1Hand;
+  }
+
+  public Boolean getIsActive() {
+    return isActive;
+  }
+
+  public void setIsActive(Boolean isActive) {
+    this.isActive = isActive;
+  }
+
+}
